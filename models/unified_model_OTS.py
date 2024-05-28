@@ -6,32 +6,6 @@ from timm import models as tmod
 import matplotlib.pyplot as plt
 import math
 
-
-
-def depthwise(in_channels, kernel_size):
-    padding = (kernel_size-1) // 2
-    assert 2*padding == kernel_size-1, "parameters incorrect. kernel={}, padding={}".format(kernel_size, padding)
-    return nn.Sequential(
-          nn.Conv2d(in_channels,in_channels,kernel_size,stride=1,padding=padding,bias=False,groups=in_channels),
-          #nn.BatchNorm2d(in_channels),
-          #nn.ReLU(inplace=True),
-        )
-
-def pointwise(in_channels, out_channels):
-    return nn.Sequential(
-          nn.Conv2d(in_channels,out_channels,1,1,0,bias=False),
-          #nn.BatchNorm2d(out_channels),
-           #nn.ReLU(inplace=True),
-        )
-
-def pointwise_out(in_channels, out_channels):
-    return nn.Sequential(
-          nn.Conv2d(in_channels,out_channels,1,1,0,bias=False),
-          #nn.BatchNorm2d(out_channels)
-        )
-
-
-
 class Decoder(nn.Module):
     def __init__(self):
         kernel_size = 3
